@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NombreApp</string>
+    <string name="tvtoolbar">ToolBar</string>
+    <string name="bjugar">Play</string>
+    <string name="bconfiguracion">Settings</string>
+    <string name="bsalir">Quit</string>
+    <string name="binformacion">About</string>
+</resources>

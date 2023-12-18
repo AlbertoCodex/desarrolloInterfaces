@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NombreApp</string>
+    <string name="tvtoolbar">ToolBar</string>
+    <string name="bjugar">Jugar</string>
+    <string name="bconfiguracion">Configuracion</string>
+    <string name="bsalir">Salir</string>
+    <string name="binformacion">Informacion</string>
+</resources>
