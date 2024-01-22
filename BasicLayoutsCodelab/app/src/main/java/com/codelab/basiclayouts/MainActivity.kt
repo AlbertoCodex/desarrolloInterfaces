@@ -17,6 +17,7 @@
 package com.codelab.basiclayouts
 
 import android.os.Bundle
+import android.window.SplashScreen
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
@@ -28,6 +29,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -63,6 +65,7 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -71,7 +74,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -79,7 +85,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
-            MySootheApp(windowSizeClass)
+            AppNavigation(windowSizeClass)
         }
     }
 }
@@ -243,7 +249,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 // Step: Bottom navigation - Material
 @Composable
-private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+private fun SootheBottomNavigation(modifier: Modifier = Modifier,navController: NavController) {
+
     NavigationBar (
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
@@ -276,8 +283,29 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
                 )
             },
             selected = false,
-            onClick = {}
+            onClick = {navController.navigate(Screen.Hotel.route)}
         )
+    }
+}
+
+@Composable
+fun SplashScreen(navController: NavController) {
+    LaunchedEffect(key1 = true) {
+        delay(5000)
+        navController.popBackStack()
+        navController.navigate(Screen.Home.route)
+    }
+    Splash()
+}
+
+@Composable
+fun Splash() {
+    Column(modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center) {
+        Image(painter = painterResource(R.drawable.fc6_nightly_wind_down), contentDescription = "Logo")
+        Text(text = "Iniciando aplicación")
+
     }
 }
 
@@ -286,7 +314,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
 fun MySootheAppPortrait() {
     MySootheTheme {
         Scaffold(
-            bottomBar = { SootheBottomNavigation() }
+            bottomBar = { SootheBottomNavigation(navController = rememberNavController()) }
         ) { padding ->
             HomeScreen(Modifier.padding(padding))
         }
@@ -361,6 +389,8 @@ fun MySootheApp(windowSize : WindowSizeClass) {
         }
     }
 }
+
+
 
 private val alignYourBodyData = listOf(
     R.drawable.ab1_inversions to R.string.ab1_inversions,

@@ -12,7 +12,9 @@
   the License.
   -->
 <resources>
-    <string name="app_name">MySoothe</string>
+    <string name="app_name">MySootheApp</string>
+    <string name="main_hotel">mainHotel</string>
+    <string name="splash">SplashScreen</string>
     <string name="favorite_collections">Favorite Collections</string>
     <string name="align_your_body">Align your Body</string>
     <string name="ab1_inversions">Inversions</string>
