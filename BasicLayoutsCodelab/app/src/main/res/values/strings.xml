@@ -14,6 +14,7 @@
 <resources>
     <string name="app_name">Hotel Alberto</string>
     <string name="malagaHotel">malagaHotel</string>
+    <string name="LoginScreen">LoginScreen</string>
     <string name="splash">SplashScreen</string>
     <string name="favorite_collections">Servicios</string>
     <string name="align_your_body">Hoteles</string>

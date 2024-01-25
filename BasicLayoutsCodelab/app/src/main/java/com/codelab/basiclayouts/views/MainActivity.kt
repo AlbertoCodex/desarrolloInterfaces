@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.codelab.basiclayouts
+package com.codelab.basiclayouts.views
 
 import android.os.Bundle
-import android.window.SplashScreen
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
@@ -74,10 +73,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.codelab.basiclayouts.navigation.AppNavigation
+import com.codelab.basiclayouts.R
+import com.codelab.basiclayouts.navigation.Screen
 import com.codelab.basiclayouts.ui.theme.MySootheTheme
 import kotlinx.coroutines.delay
 
@@ -295,7 +296,7 @@ fun SplashScreen(navController: NavController) {
     LaunchedEffect(key1 = true) {
         delay(3000)
         navController.popBackStack()
-        navController.navigate(Screen.Home.route)
+        navController.navigate(Screen.Login.route)
     }
     Splash()
 }
