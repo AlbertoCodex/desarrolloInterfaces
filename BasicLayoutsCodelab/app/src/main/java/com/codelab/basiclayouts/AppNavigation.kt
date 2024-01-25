@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 
 sealed class Screen(val route: String, @StringRes val resourceId: Int) {
     object Home : Screen("MySootheApp", R.string.app_name)
-    object Hotel : Screen("mainHotel", R.string.main_hotel)
+    object Hotel : Screen("malagaHotel", R.string.malagaHotel)
     object Splash : Screen("SplashScreen", R.string.splash)
 }
 
@@ -19,6 +19,7 @@ fun AppNavigation(windowSizeClass: WindowSizeClass) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.Splash.route) {
         composable(Screen.Home.route) { MySootheApp(windowSize = windowSizeClass) }
+        composable(Screen.Hotel.route) { malagaHotel(navController) }
         composable(Screen.Splash.route) { SplashScreen(navController) }
 
         /*  composable("password") { ... }

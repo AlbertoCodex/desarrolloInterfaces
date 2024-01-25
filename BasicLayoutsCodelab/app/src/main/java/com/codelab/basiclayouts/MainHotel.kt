@@ -21,13 +21,12 @@ import androidx.navigation.NavController
 import java.security.AccessController
 
 @Composable
-fun mainHotel(modifier: Modifier = Modifier,navController:NavController ) {
+fun malagaHotel(navController : NavController ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
     ) {
         Image(
-            painter = painterResource(R.drawable.ab1_inversions),
+            painter = painterResource(R.drawable.hotel1),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
