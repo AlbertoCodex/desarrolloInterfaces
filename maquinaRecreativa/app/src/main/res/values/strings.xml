@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MaquinaRecreativa</string>
+    <string name="btn_jugarText">Jugar</string>
+    <string name="btn_settings">Ajustes</string>
+    <string name="btn_help">Ayuda</string>
+    <string name="btn_exit">Salir</string>
+</resources>
