@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ayuda"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AyudaActivity">
+    <!-- Display -->
+    <TextView
+        android:id="@+id/displaylarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/display_large"
+        style="@style/TextAppearance.Material3.DisplayLarge" />
+    <TextView
+        android:id="@+id/displaymedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_medium"
+        style="@style/TextAppearance.Material3.DisplayMedium"/>
+    <TextView
+        android:id="@+id/displaysmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/display_small"
+        style="@style/TextAppearance.Material3.DisplaySmall"/>
+    <!-- Headline -->
+    <TextView
+        android:id="@+id/headlinelarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/headline_large"
+        style="@style/TextAppearance.Material3.HeadlineLarge" />
+    <TextView
+        android:id="@+id/headlinemedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/headline_medium"
+        style="@style/TextAppearance.Material3.HeadlineMedium"/>
+    <TextView
+        android:id="@+id/headlinesmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/headline_small"
+        style="@style/TextAppearance.Material3.HeadlineSmall"/>
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titlelarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_large"
+        style="@style/TextAppearance.Material3.TitleLarge" />
+    <TextView
+        android:id="@+id/titlemedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_medium"
+        android:textSize="20sp"
+        style="@style/TextAppearance.Material3.TitleMedium"/>
+    <TextView
+        android:id="@+id/titlesmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_small"
+        style="@style/TextAppearance.Material3.TitleSmall"/>
+    <!-- Body -->
+    <TextView
+        android:id="@+id/bodylarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/body_large"
+        android:textSize="20sp"
+        style="@style/TextAppearance.Material3.BodyLarge" />
+    <TextView
+        android:id="@+id/bodymedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/body_medium"
+        android:textSize="20sp"
+        style="@style/TextAppearance.Material3.BodyMedium"/>
+    <TextView
+        android:id="@+id/bodysmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/body_small"
+        android:textSize="20sp"
+        style="@style/TextAppearance.Material3.BodySmall"/>
+    <!-- Label -->
+    <TextView
+        android:id="@+id/labellarge"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="@string/label_large"
+        style="@style/TextAppearance.Material3.DisplayLarge" />
+    <TextView
+        android:id="@+id/labelmedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_medium"
+        style="@style/TextAppearance.Material3.LabelMedium"/>
+    <TextView
+        android:id="@+id/labelsmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_small"
+        style="@style/TextAppearance.Material3.LabelSmall"/>
+</LinearLayout>

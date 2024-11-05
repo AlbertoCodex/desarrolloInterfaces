@@ -1,7 +1,29 @@
 <resources>
+    <!-- Nombre APP -->
     <string name="app_name">MaquinaRecreativa</string>
+    <!-- Botones -->
     <string name="btn_jugarText">Play</string>
     <string name="btn_settings">Settings</string>
     <string name="btn_help">Help</string>
     <string name="btn_exit">Exit</string>
+    <!-- Display Styles -->
+    <string name="display_large">Lorem Ipsum Display Large</string>
+    <string name="display_medium">Lorem Ipsum Display Medium</string>
+    <string name="display_small">Lorem Ipsum Display Small</string>
+    <!-- Headline Styles -->
+    <string name="headline_large">Lorem Ipsum Headline Large</string>
+    <string name="headline_medium">Lorem Ipsum Headline Medium</string>
+    <string name="headline_small">Lorem Ipsum Headline Small</string>
+    <!-- Title Styles -->
+    <string name="title_large">Lorem Ipsum Title Large</string>
+    <string name="title_medium">Lorem Ipsum Title Medium</string>
+    <string name="title_small">Lorem Ipsum Title Small</string>
+    <!-- Body Styles -->
+    <string name="body_large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</string>
+    <string name="body_medium">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</string>
+    <string name="body_small">Lorem ipsum dolor sit amet.</string>
+    <!-- Label Styles -->
+    <string name="label_large">Label Large Text Example</string>
+    <string name="label_medium">Label Medium Text Example</string>
+    <string name="label_small">Label Small Text Example</string>
 </resources>

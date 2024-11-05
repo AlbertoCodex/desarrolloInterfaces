@@ -9,14 +9,14 @@
 
     <!-- Imagen -->
     <ImageView
-        android:id="@+id/img_Ejemplo"
+        android:id="@+id/img_Logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:srcCompat="@drawable/logo" />
 
     <!-- Barras Verticales -->
     <androidx.constraintlayout.widget.Guideline
