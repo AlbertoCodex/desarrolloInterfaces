@@ -7,6 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Toolbar TOP -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarTOP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        style="@style/Widget.Material3.Toolbar"
+        app:layout_constraintBottom_toTopOf="@+id/img_Logo"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!-- Botones -->
+        <ImageButton
+            android:id="@+id/info_Toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Boton Info"
+            android:src="@android:drawable/ic_dialog_info"
+            >
+        </ImageButton>
+    </androidx.appcompat.widget.Toolbar>
+
     <!-- Imagen -->
     <ImageView
         android:id="@+id/img_Logo"
@@ -15,8 +38,9 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:layout_constraintTop_toBottomOf="@id/toolbarTOP"
+        app:srcCompat="@drawable/logo"
+        />
 
     <!-- Barras Verticales -->
     <androidx.constraintlayout.widget.Guideline
@@ -73,9 +97,52 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_exit"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/btn_help" />
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:id="@+id/bottomNavigation"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_dark_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+            <!-- HOME -->
+            <ImageButton
+                android:contentDescription="Boton Home"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_navHome"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_compass"
+                android:layout_gravity="center">
+            </ImageButton>
+            <!-- Exit -->
+            <ImageButton
+                android:contentDescription="Boton Settings"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_navExit"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/btn_dialog"
+                android:layout_gravity="end|center">
+            </ImageButton>
+            <!-- Settings -->
+            <ImageButton
+                android:contentDescription="Boton Settings"
+                android:layout_width="wrap_content"
+                android:id="@+id/btn_navSettings"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_manage"
+                android:layout_gravity="start|center">
+            </ImageButton>
+        </FrameLayout>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
