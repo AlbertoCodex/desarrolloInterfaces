@@ -1,0 +1,1 @@
+cd "c:\Users\Alberto\Desktop\Naranjo_Alberto_ExamenKotlin\" ; if ($?) { kotlinc Main.kt Vehiculo.kt Moto.kt Turismo.kt Empresa.kt -include-runtime -d Main.jar } ; if ($?) { java -jar Main.jar }
