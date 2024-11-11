@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ayuda"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <!-- Toolbar TOP -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarTOP"
@@ -23,32 +24,11 @@
             >
         </ImageButton>
     </androidx.appcompat.widget.Toolbar>
-    <RadioGroup
-        android:id="@+id/radiogroup"
+    <!-- Display -->
+    <TextView
+        android:id="@+id/displaylarge"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¿Desea activar el modo ahorro?"
-            android:textSize="24sp"/>
-        <RadioButton
-            android:id="@+id/rb_ahorro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Si" />
-        <RadioButton
-            android:id="@+id/rb_ausente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No" />
-    </RadioGroup>
-
-    <Switch
-        android:id="@+id/sw_vibracion"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textSize="24sp"
-        android:text="Vibración" />
+        android:text="ESTE ES EL FRAGMENT DE AYUDA"
+        style="@style/TextAppearance.Material3.DisplayLarge" />
 </LinearLayout>
