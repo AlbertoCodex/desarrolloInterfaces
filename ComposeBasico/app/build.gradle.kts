@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "ies.politecnico.composebasico"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ies.politecnico.composebasico"
