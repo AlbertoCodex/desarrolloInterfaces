@@ -21,8 +21,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import ies.politecnico.composebasico.ui.theme.ComposeBasicoTheme
+import ies.politecnico.composebasico.ui.theme.MercadonaTheme
+import ies.politecnico.composebasico.ui.theme.CocaColaTheme
+import ies.politecnico.composebasico.ui.theme.DBTheme
+import ies.politecnico.composebasico.ui.theme.PepsiTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +47,19 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     val extraPadding = if (expanded.value) 48.dp else 0.dp
     Surface(
         color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+        modifier = Modifier
+            .padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(modifier = Modifier
                 .weight(1f)
                 .padding(bottom = extraPadding)) {
-                Text(text = name)
-            }
+                    Text(
+                        text = name,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                }
             ElevatedButton(
                 onClick = { expanded.value = !expanded.value }
             ) {
@@ -60,10 +71,18 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun Greetings (modifier: Modifier = Modifier) {
-    val names: List<String> = listOf("Mercadona", "Coca Cola")
+    val baseNames: List<String> = listOf("Mercadona", "Coca Cola", "Pepsi", "Dragon Ball") // Lista de nombres
+    val names = List(7) { baseNames[it % baseNames.size] } // Repite los nombres hasta llegar a 8
+
     Column(modifier = modifier.padding(vertical = 4.dp)) {
-        for(name in names) {
-            Greeting(name = name)
+        names.forEach { name ->
+            when (name) {
+                "Mercadona" -> MercadonaTheme { Greeting(name = name) }
+                "Coca Cola" -> CocaColaTheme { Greeting(name = name) }
+                "Pepsi" -> PepsiTheme { Greeting(name = name) }
+                "Dragon Ball" -> DBTheme { Greeting(name = name) }
+                else -> ComposeBasicoTheme { Greeting(name = name) }
+            }
         }
     }
 }

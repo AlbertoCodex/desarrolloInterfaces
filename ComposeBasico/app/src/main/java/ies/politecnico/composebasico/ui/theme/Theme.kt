@@ -56,3 +56,59 @@ fun ComposeBasicoTheme(
         content = content
     )
 }
+
+// Tema para Mercadona
+@Composable
+fun MercadonaTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = MercadonaPrimary,
+            onPrimary = MercadonaOnPrimary,
+            background = MercadonaBackground
+        ),
+        typography = MercadonaTypography,
+        content = content
+    )
+}
+
+// Tema para Coca Cola
+@Composable
+fun CocaColaTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = CocaColaPrimary,
+            onPrimary = CocaColaOnPrimary,
+            background = CocaColaBackground
+        ),
+        typography = CocaColaTypography,
+        content = content
+    )
+}
+
+// Tema para Pepsi
+@Composable
+fun PepsiTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = PepsiPrimary,
+            onPrimary = PepsiOnPrimary,
+            background = PepsiBackground
+        ),
+        typography = PepsiTypography,
+        content = content
+    )
+}
+
+// Tema para DB
+@Composable
+fun DBTheme(content: @Composable () -> Unit) {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            primary = DBPrimary,
+            onPrimary = DBOnPrimary,
+            background = DBBackground
+        ),
+        typography = DBTypography,
+        content = content
+    )
+}
