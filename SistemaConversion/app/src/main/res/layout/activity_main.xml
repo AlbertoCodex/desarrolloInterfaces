@@ -1,0 +1,155 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="?android:attr/windowBackground">
+
+    <!-- Header -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/colorPrimary"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Conversor Divisas"
+            android:gravity="center_horizontal"
+            android:textSize="23sp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:textColor="?android:attr/textColorPrimary"/>
+    </FrameLayout>
+
+    <!-- Layout para Conversion -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:background="?android:attr/colorAccent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <!-- Parte izquierda -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="?android:attr/colorPrimary"
+            android:orientation="vertical"
+            android:gravity="center">
+            <!-- TV Horizontales -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Divisa Base"
+                    android:textColor="?android:attr/textColorPrimary"/>
+                <Spinner
+                    android:id="@+id/spinner_izquierda_monedas"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Parte Derecha -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="?android:attr/colorPrimaryDark"
+            android:padding="8dp"
+            android:gravity="center">
+            <!-- TV Horizontales -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Divisa Cotizada"
+                    android:textColor="?android:attr/textColorPrimary"/>
+                <Spinner
+                    android:id="@+id/spinner_derecha_monedas"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <!-- TV Cantidad -->
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="Cantidad:"
+            android:textColor="#333333"/>
+        <EditText
+            android:id="@+id/et_cantidad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="1000" />
+    </LinearLayout>
+    <!-- Botón -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/boton_Calc"
+        android:gravity="center"
+        android:text="Calcular"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <!-- Imagen -->
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/imagen_divisas"
+        android:contentDescription="Currency Image"
+        android:layout_marginTop="80dp"/>
+
+    <!-- TV Resultado -->
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:text="Resultado:"
+            android:textColor="?android:attr/textColorPrimary"/>
+        <TextView
+            android:id="@+id/tv_resultado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:text="100" />
+    </LinearLayout>
+</LinearLayout>

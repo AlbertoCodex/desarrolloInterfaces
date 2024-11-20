@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SistemaConversion</string>
+
+    <string-array name="monedas_array">
+        <item>Euro</item>
+        <item>Dolar</item>
+        <item>Libra</item>
+        <item>Yen</item>
+    </string-array>
+
+</resources>
