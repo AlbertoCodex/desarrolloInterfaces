@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ExamenMcDonalds</string>
+    <string name="btn_pollo">Chicken</string>
+    <string name="btn_cerdo">Pork</string>
+    <string name="btn_ternera">Beef</string>
+</resources>
