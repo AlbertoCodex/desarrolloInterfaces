@@ -1,4 +1,4 @@
-package com.example.composeavanzado
+package com.example.composeavanzado.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -54,7 +54,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.composeavanzado.R
 import com.example.composeavanzado.data.DrawableStringPair
+import com.example.composeavanzado.navigation.AppNavigation
+import com.example.composeavanzado.navigation.AppScreens
 import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
 
 
@@ -64,29 +68,29 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
-            PokerApp(windowSizeClass)
+            AppNavigation(windowSizeClass)
         }
     }
 }
 
 @Composable
-fun PokerApp(windowSize: WindowSizeClass) {
+fun PokerApp(windowSize: WindowSizeClass, navController: NavController) {
     when (windowSize.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
-            PokerAppPortrait()
+            PokerAppPortrait(navController)
         }
         WindowWidthSizeClass.Expanded -> {
             PokerAppLandscape()
         }
-        else -> PokerAppPortrait() // Default
+        else -> PokerAppPortrait(navController) // Default
     }
 }
 
 @Composable
-fun PokerAppPortrait() {
+fun PokerAppPortrait(navController: NavController) {
     ComposeAvanzadoTheme {
         Scaffold(
-            bottomBar = { SootheBottomNavigation() }
+            bottomBar = { SootheBottomNavigation(modifier = Modifier, navController) }
         ) { padding ->
             HomeScreen(Modifier.padding(padding))
         }
@@ -142,7 +146,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
+fun SootheBottomNavigation(modifier: Modifier = Modifier, navController: NavController) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
@@ -158,26 +162,30 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.bottom_navigation_home))
             },
             selected = true,
-            onClick = {}
+            onClick = {
+                navController.navigate(route = AppScreens.Main.route)
+            }
         )
         NavigationBarItem(
             icon = {
                 Icon(
                     imageVector = Icons.Default.Settings,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             },
             label = {
                 Text(stringResource(R.string.bottom_navigation_ajustes))
             },
             selected = false,
-            onClick = {}
+            onClick = {
+                navController.navigate(route = AppScreens.Segunda.route)
+            }
         )
     }
 }
 
 @Composable
-private fun SootheNavigationRail(modifier: Modifier = Modifier) {
+fun SootheNavigationRail(modifier: Modifier = Modifier) {
     NavigationRail(
         modifier = modifier.padding(start = 8.dp, end = 8.dp),
         containerColor = MaterialTheme.colorScheme.background,

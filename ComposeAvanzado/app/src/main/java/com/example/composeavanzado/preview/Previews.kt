@@ -5,15 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.composeavanzado.AlignYourBodyElement
-import com.example.composeavanzado.AlignYourBodyRow
-import com.example.composeavanzado.FavoriteCollectionCard
-import com.example.composeavanzado.FavoriteCollectionsGrid
-import com.example.composeavanzado.HomeScreen
-import com.example.composeavanzado.HomeSection
-import com.example.composeavanzado.PokerApp
+import com.example.composeavanzado.screens.AlignYourBodyElement
+import com.example.composeavanzado.screens.AlignYourBodyRow
+import com.example.composeavanzado.screens.FavoriteCollectionCard
+import com.example.composeavanzado.screens.FavoriteCollectionsGrid
+import com.example.composeavanzado.screens.HomeScreen
+import com.example.composeavanzado.screens.HomeSection
 import com.example.composeavanzado.R
-import com.example.composeavanzado.SearchBar
+import com.example.composeavanzado.screens.SearchBar
 import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
 
 class Previews {
