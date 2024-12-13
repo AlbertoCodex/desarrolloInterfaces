@@ -26,6 +26,8 @@
     <!-- Botones -->
     <Button
         android:layout_gravity="center"
+        android:drawableLeft="@drawable/icon_chicken"
+
         android:id="@+id/btn_pollo"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
