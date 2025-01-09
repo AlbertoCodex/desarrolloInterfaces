@@ -29,7 +29,7 @@ class Previews {
         ComposeAvanzadoTheme {
             AlignYourBodyElement(
                 text = R.string.omaha,
-                drawable = R.drawable.omaha,
+                drawable = R.drawable.utilidad_manos,
                 modifier = Modifier.padding(8.dp)
             )
         }
@@ -41,7 +41,7 @@ class Previews {
         ComposeAvanzadoTheme {
             FavoriteCollectionCard(
                 text = R.string.mejores_manos,
-                drawable = R.drawable.omaha,
+                drawable = R.drawable.utilidad_manos,
                 modifier = Modifier.padding(8.dp)
             )
         }

@@ -336,15 +336,16 @@ fun FavoriteCollectionsGrid(
 
 // Data
 private val alignYourBodyData = listOf(
-    R.drawable.texashe to R.string.omaha,
-    R.drawable.texashe to R.string.texashe,
-    R.drawable.texashe to R.string.fivecard,
-    R.drawable.texashe to R.string.sevencard,
-    R.drawable.texashe to R.string.razz,
-    R.drawable.texashe to R.string.triple_stud,
-    R.drawable.texashe to R.string.horse,
+    R.drawable.modalidad_omaha to R.string.omaha,
+    R.drawable.modalidad_texashe to R.string.texashe,
+    R.drawable.modalidad_draw to R.string.fivecard,
+    R.drawable.modalidad_stud to R.string.sevencard,
+    R.drawable.modalidad_horse to R.string.horse,
 ).map { DrawableStringPair(it.first, it.second) }
 private val favoriteCollectionsData = listOf(
-    R.drawable.omaha to R.string.mejores_manos,
-    R.drawable.fichas to R.string.apuestas,
+    R.drawable.utilidad_manos to R.string.mejores_manos,
+    R.drawable.utilidad_apuestas to R.string.apuestas,
+    R.drawable.utilidad_reglas to R.string.reglas,
+    R.drawable.utilidad_escala to R.string.escala,
+
 ).map { DrawableStringPair(it.first, it.second) }

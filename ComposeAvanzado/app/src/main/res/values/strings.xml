@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ComposeAvanzado</string>
+    <string name="app_name">PokerApp</string>
     <!-- Titulos -->
     <string name="modalidades">Modalidades</string>
     <string name="utilidades">Utilidades</string>
@@ -14,6 +14,8 @@
     <!-- Utilidades -->
     <string name="apuestas">Apuestas</string>
     <string name="mejores_manos">Mejores Manos</string>
+    <string name="reglas">Reglas</string>
+    <string name="escala">Escala de manos</string>
 
     <!-- Navigation Bar -->
     <string name="bottom_navigation_home">Home</string>
