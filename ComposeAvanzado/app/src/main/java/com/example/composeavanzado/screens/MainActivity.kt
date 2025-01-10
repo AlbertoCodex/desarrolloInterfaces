@@ -347,5 +347,4 @@ private val favoriteCollectionsData = listOf(
     R.drawable.utilidad_apuestas to R.string.apuestas,
     R.drawable.utilidad_reglas to R.string.reglas,
     R.drawable.utilidad_escala to R.string.escala,
-
 ).map { DrawableStringPair(it.first, it.second) }
