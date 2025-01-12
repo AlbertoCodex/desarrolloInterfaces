@@ -178,7 +178,7 @@ fun SootheBottomNavigation(modifier: Modifier = Modifier, navController: NavCont
             },
             selected = false,
             onClick = {
-                navController.navigate(route = AppScreens.Segunda.route)
+                navController.navigate(route = AppScreens.Settings.route)
             }
         )
     }

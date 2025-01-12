@@ -2,5 +2,6 @@ package com.example.composeavanzado.navigation
 
 sealed class AppScreens(val route:String) {
     object Main:AppScreens("main")
-    object Segunda:AppScreens("segunda")
+    object Settings:AppScreens("settings")
+    object Login:AppScreens("login")
 }

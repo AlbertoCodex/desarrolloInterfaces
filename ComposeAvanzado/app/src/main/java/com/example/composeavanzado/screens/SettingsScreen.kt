@@ -20,20 +20,20 @@ import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
 
 
 @Composable
-fun HelloWorldApp(windowSize: WindowSizeClass, navController: NavController) {
+fun SettingsApp(windowSize: WindowSizeClass, navController: NavController) {
     when (windowSize.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
-            HelloWorldPortrait(navController)
+            SettingsPortrait(navController)
         }
         WindowWidthSizeClass.Expanded -> {
-            HellowWorldLandscape()
+            SettingsLandscape()
         }
-        else -> HelloWorldPortrait(navController) // Default
+        else -> SettingsPortrait(navController) // Default
     }
 }
 
 @Composable
-fun HelloWorldHome(modifier: Modifier = Modifier) {
+fun SettingsHome(modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -45,23 +45,23 @@ fun HelloWorldHome(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun HelloWorldPortrait(navController: NavController) {
+fun SettingsPortrait(navController: NavController) {
     ComposeAvanzadoTheme {
         Scaffold(
             bottomBar = { SootheBottomNavigation(modifier = Modifier, navController) }
         ) { padding ->
-            HelloWorldHome(Modifier.padding(padding))
+            SettingsHome(Modifier.padding(padding))
         }
     }
 }
 
 @Composable
-fun HellowWorldLandscape() {
+fun SettingsLandscape() {
     ComposeAvanzadoTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
             Row {
                 SootheNavigationRail()
-                HelloWorldHome()
+                SettingsHome()
             }
         }
     }
