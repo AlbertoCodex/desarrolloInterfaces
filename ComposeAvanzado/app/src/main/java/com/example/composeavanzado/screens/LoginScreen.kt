@@ -16,6 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,37 +28,41 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.composeavanzado.R
-import com.example.composeavanzado.navigation.AppScreens
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
+fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp)) {
-        Login(Modifier.align(Alignment.Center), navController)
+        Login(Modifier.align(Alignment.Center), navController, viewModel)
     }
 }
 
 @Composable
-fun Login(modifier: Modifier, navController: NavHostController) {
+fun Login(modifier: Modifier, navController: NavHostController, viewModel: LoginViewModel) {
+    val email : String by viewModel.email.observeAsState(initial = "")
+    val password : String by viewModel.password.observeAsState(initial = "")
+    val loginEnable:Boolean by viewModel.loginEnable.observeAsState(initial = false)
+
+
     Column(modifier = modifier) {
         HeaderImage(modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(16.dp))
-        EmailField()
+        EmailField(email) {viewModel.onLoginChange(it, password)}
         Spacer(modifier = Modifier.padding(4.dp))
-        PasswordField()
+        PasswordField(password) {viewModel.onLoginChange(email, it)}
         Spacer(modifier = Modifier.padding(8.dp))
         ForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.padding(16.dp))
-        LoginButton(navController)
+        LoginButton(loginEnable) {viewModel.onLoginSelected(navController)}
     }
 }
 
 @Composable
-fun LoginButton(navController: NavHostController) {
+fun LoginButton(loginEnable:Boolean, onLoginSelected: () -> Unit) {
     Button(
-        onClick = {navController.navigate(route = AppScreens.Main.route)},
+        onClick = {onLoginSelected()},
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -65,7 +71,8 @@ fun LoginButton(navController: NavHostController) {
             disabledContentColor = Color.White,
             containerColor = Color.Blue,
             contentColor = Color.White
-        )
+        ),
+        enabled = loginEnable
     ) {
         Text(text = "Iniciar Sesion")
     }
@@ -92,8 +99,9 @@ fun HeaderImage(modifier: Modifier) {
 }
 
 @Composable
-fun EmailField() {
-    TextField(value = "", onValueChange = {},
+fun EmailField(email:String, onTextFieldChange:(String) -> Unit) {
+
+    TextField(value = email, onValueChange = { onTextFieldChange(it) },
         modifier = Modifier.fillMaxWidth(),
         placeholder = { Text(text = "Email") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -106,8 +114,8 @@ fun EmailField() {
 }
 
 @Composable
-fun PasswordField() {
-    TextField(value = "", onValueChange = {},
+fun PasswordField(password:String, onTextFieldChange:(String) -> Unit) {
+    TextField(value = password, onValueChange = {onTextFieldChange(it)},
         modifier = Modifier.fillMaxWidth(),
         placeholder = { Text(text = "Contraseña") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),

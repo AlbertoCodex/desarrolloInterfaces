@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeavanzado.screens.LoginScreen
+import com.example.composeavanzado.screens.LoginViewModel
 import com.example.composeavanzado.screens.SettingsApp
 import com.example.composeavanzado.screens.PokerApp
 
@@ -20,7 +21,7 @@ fun AppNavigation(windowSizeClass: WindowSizeClass) {
             SettingsApp(windowSizeClass, navController)
         }
         composable(route = AppScreens.Login.route) {
-            LoginScreen(navController)
+            LoginScreen(navController, LoginViewModel())
         }
     }
 }
