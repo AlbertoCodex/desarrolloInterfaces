@@ -2,6 +2,7 @@ package com.example.composeavanzado.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -24,10 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.composeavanzado.R
+import com.example.composeavanzado.navigation.AppScreens
 
 @Composable
 fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
@@ -45,7 +49,6 @@ fun Login(modifier: Modifier, navController: NavHostController, viewModel: Login
     val password : String by viewModel.password.observeAsState(initial = "")
     val loginEnable:Boolean by viewModel.loginEnable.observeAsState(initial = false)
 
-
     Column(modifier = modifier) {
         HeaderImage(modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.padding(16.dp))
@@ -55,8 +58,22 @@ fun Login(modifier: Modifier, navController: NavHostController, viewModel: Login
         Spacer(modifier = Modifier.padding(8.dp))
         ForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.padding(16.dp))
+        Divider(loginEnable, viewModel, navController, Modifier.align(Alignment.CenterHorizontally))
+    }
+}
+
+@Composable
+fun Divider(loginEnable:Boolean, viewModel: LoginViewModel, navController: NavHostController, modifier: Modifier) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
         LoginButton(loginEnable) {viewModel.onLoginSelected(navController)}
     }
+    HorizontalDivider(
+        thickness = 2.dp,
+        modifier = Modifier.padding(vertical = 16.dp)
+    )
+    RegisterUser(modifier, navController)
 }
 
 @Composable
@@ -76,6 +93,17 @@ fun LoginButton(loginEnable:Boolean, onLoginSelected: () -> Unit) {
     ) {
         Text(text = "Iniciar Sesion")
     }
+}
+
+@Composable
+fun RegisterUser(modifier: Modifier, navController: NavHostController) {
+    Text(
+        text = "Crear nuevo usuario",
+        modifier = modifier.clickable { navController.navigate(route = AppScreens.Register.route) },
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        color = Color.Blue
+    )
 }
 
 @Composable
@@ -100,8 +128,9 @@ fun HeaderImage(modifier: Modifier) {
 
 @Composable
 fun EmailField(email:String, onTextFieldChange:(String) -> Unit) {
-
-    TextField(value = email, onValueChange = { onTextFieldChange(it) },
+    TextField(
+        value = email,
+        onValueChange = { onTextFieldChange(it) },
         modifier = Modifier.fillMaxWidth(),
         placeholder = { Text(text = "Email") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
@@ -115,12 +144,15 @@ fun EmailField(email:String, onTextFieldChange:(String) -> Unit) {
 
 @Composable
 fun PasswordField(password:String, onTextFieldChange:(String) -> Unit) {
-    TextField(value = password, onValueChange = {onTextFieldChange(it)},
+    TextField(
+        value = password,
+        onValueChange = {onTextFieldChange(it)},
         modifier = Modifier.fillMaxWidth(),
         placeholder = { Text(text = "Contraseña") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
         maxLines = 1,
+        visualTransformation = PasswordVisualTransformation(),
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color.Gray
         )

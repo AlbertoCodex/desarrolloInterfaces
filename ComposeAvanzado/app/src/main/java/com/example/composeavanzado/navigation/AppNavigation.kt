@@ -9,6 +9,7 @@ import com.example.composeavanzado.screens.LoginScreen
 import com.example.composeavanzado.screens.LoginViewModel
 import com.example.composeavanzado.screens.SettingsApp
 import com.example.composeavanzado.screens.PokerApp
+import com.example.composeavanzado.screens.RegisterScreen
 
 @Composable
 fun AppNavigation(windowSizeClass: WindowSizeClass) {
@@ -22,6 +23,9 @@ fun AppNavigation(windowSizeClass: WindowSizeClass) {
         }
         composable(route = AppScreens.Login.route) {
             LoginScreen(navController, LoginViewModel())
+        }
+        composable(route = AppScreens.Register.route) {
+            RegisterScreen(navController, LoginViewModel())
         }
     }
 }
