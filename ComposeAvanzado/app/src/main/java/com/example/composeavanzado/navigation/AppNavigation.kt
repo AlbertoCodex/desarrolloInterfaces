@@ -10,9 +10,10 @@ import com.example.composeavanzado.screens.LoginViewModel
 import com.example.composeavanzado.screens.SettingsApp
 import com.example.composeavanzado.screens.PokerApp
 import com.example.composeavanzado.screens.RegisterScreen
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun AppNavigation(windowSizeClass: WindowSizeClass) {
+fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = AppScreens.Login.route) {
         composable(route = AppScreens.Main.route) {
@@ -22,10 +23,10 @@ fun AppNavigation(windowSizeClass: WindowSizeClass) {
             SettingsApp(windowSizeClass, navController)
         }
         composable(route = AppScreens.Login.route) {
-            LoginScreen(navController, LoginViewModel())
+            LoginScreen(navController, LoginViewModel(), auth)
         }
         composable(route = AppScreens.Register.route) {
-            RegisterScreen(navController, LoginViewModel())
+            RegisterScreen(navController, LoginViewModel(), auth)
         }
     }
 }

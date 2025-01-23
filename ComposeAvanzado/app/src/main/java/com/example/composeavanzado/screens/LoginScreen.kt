@@ -32,19 +32,25 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.composeavanzado.R
 import com.example.composeavanzado.navigation.AppScreens
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel) {
+fun LoginScreen(navController: NavHostController, viewModel: LoginViewModel, auth: FirebaseAuth) {
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp)) {
-        Login(Modifier.align(Alignment.Center), navController, viewModel)
+        Login(Modifier.align(Alignment.Center), navController, viewModel, auth)
     }
 }
 
 @Composable
-fun Login(modifier: Modifier, navController: NavHostController, viewModel: LoginViewModel) {
+fun Login(
+    modifier: Modifier,
+    navController: NavHostController,
+    viewModel: LoginViewModel,
+    auth: FirebaseAuth
+) {
     val email : String by viewModel.email.observeAsState(initial = "")
     val password : String by viewModel.password.observeAsState(initial = "")
     val loginEnable:Boolean by viewModel.loginEnable.observeAsState(initial = false)
@@ -58,16 +64,24 @@ fun Login(modifier: Modifier, navController: NavHostController, viewModel: Login
         Spacer(modifier = Modifier.padding(8.dp))
         ForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.padding(16.dp))
-        Divider(loginEnable, viewModel, navController, Modifier.align(Alignment.CenterHorizontally))
+        Divider(loginEnable, viewModel, navController, Modifier.align(Alignment.CenterHorizontally), auth, email, password)
     }
 }
 
 @Composable
-fun Divider(loginEnable:Boolean, viewModel: LoginViewModel, navController: NavHostController, modifier: Modifier) {
+fun Divider(
+    loginEnable: Boolean,
+    viewModel: LoginViewModel,
+    navController: NavHostController,
+    modifier: Modifier,
+    auth: FirebaseAuth,
+    email: String,
+    password: String
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-        LoginButton(loginEnable) {viewModel.onLoginSelected(navController)}
+        LoginButton(loginEnable) {viewModel.onLoginSelected(navController, auth, email, password)}
     }
     HorizontalDivider(
         thickness = 2.dp,

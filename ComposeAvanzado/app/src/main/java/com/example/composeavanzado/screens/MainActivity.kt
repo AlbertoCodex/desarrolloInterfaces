@@ -60,17 +60,25 @@ import com.example.composeavanzado.data.DrawableStringPair
 import com.example.composeavanzado.navigation.AppNavigation
 import com.example.composeavanzado.navigation.AppScreens
 import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : ComponentActivity() {
+    private lateinit var auth: FirebaseAuth
+
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
+        auth = Firebase.auth
         super.onCreate(savedInstanceState)
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
-            AppNavigation(windowSizeClass)
+            AppNavigation(windowSizeClass, auth)
         }
     }
+
+
 }
 
 @Composable
