@@ -1,4 +1,4 @@
-package com.example.composeavanzado.screens
+package com.example.composeavanzado.screens.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -28,9 +28,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -56,29 +59,31 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composeavanzado.R
+import com.example.composeavanzado.data.DataFirebase
 import com.example.composeavanzado.data.DrawableStringPair
 import com.example.composeavanzado.navigation.AppNavigation
 import com.example.composeavanzado.navigation.AppScreens
 import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : ComponentActivity() {
-    private lateinit var auth: FirebaseAuth
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        auth = Firebase.auth
+        // Instancia de Firebase
+        val firebase = DataFirebase(Firebase.auth, Firebase.firestore)
+
         super.onCreate(savedInstanceState)
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
-            AppNavigation(windowSizeClass, auth)
+            AppNavigation(windowSizeClass, firebase.auth, firebase.db)
         }
     }
-
-
 }
 
 @Composable
@@ -177,16 +182,31 @@ fun SootheBottomNavigation(modifier: Modifier = Modifier, navController: NavCont
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Settings,
+                    imageVector = Icons.Default.Star,
                     contentDescription = null,
                 )
             },
             label = {
-                Text(stringResource(R.string.bottom_navigation_ajustes))
+                Text(stringResource(R.string.bottom_navigation_torneos))
             },
             selected = false,
             onClick = {
-                navController.navigate(route = AppScreens.Settings.route)
+                navController.navigate(route = AppScreens.Torneos.route)
+            }
+        )
+        NavigationBarItem(
+            icon = {
+                Icon(
+                    imageVector = Icons.Default.AccountCircle,
+                    contentDescription = "Perfil",
+                )
+            },
+            label = {
+                Text(stringResource(R.string.bottom_navigation_perfil))
+            },
+            selected = false,
+            onClick = {
+                navController.navigate(route = AppScreens.Profile.route)
             }
         )
     }
@@ -225,7 +245,7 @@ fun SootheNavigationRail(modifier: Modifier = Modifier) {
                     )
                 },
                 label = {
-                    Text(stringResource(R.string.bottom_navigation_ajustes))
+                    Text(stringResource(R.string.bottom_navigation_torneos))
                 },
                 selected = false,
                 onClick = {}

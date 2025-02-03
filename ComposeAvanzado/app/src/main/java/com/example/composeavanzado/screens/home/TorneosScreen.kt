@@ -1,4 +1,4 @@
-package com.example.composeavanzado.screens
+package com.example.composeavanzado.screens.home
 
 
 
@@ -20,7 +20,7 @@ import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
 
 
 @Composable
-fun SettingsApp(windowSize: WindowSizeClass, navController: NavController) {
+fun TorneosScreen(windowSize: WindowSizeClass, navController: NavController) {
     when (windowSize.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             SettingsPortrait(navController)
@@ -33,7 +33,7 @@ fun SettingsApp(windowSize: WindowSizeClass, navController: NavController) {
 }
 
 @Composable
-fun SettingsHome(modifier: Modifier = Modifier) {
+fun TorneosHome(modifier: Modifier = Modifier) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
@@ -50,7 +50,7 @@ fun SettingsPortrait(navController: NavController) {
         Scaffold(
             bottomBar = { SootheBottomNavigation(modifier = Modifier, navController) }
         ) { padding ->
-            SettingsHome(Modifier.padding(padding))
+            TorneosHome(Modifier.padding(padding))
         }
     }
 }
@@ -61,7 +61,7 @@ fun SettingsLandscape() {
         Surface(color = MaterialTheme.colorScheme.background) {
             Row {
                 SootheNavigationRail()
-                SettingsHome()
+                TorneosHome()
             }
         }
     }

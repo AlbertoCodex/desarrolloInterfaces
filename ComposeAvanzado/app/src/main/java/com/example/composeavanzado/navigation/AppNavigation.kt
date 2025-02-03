@@ -7,30 +7,37 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composeavanzado.screens.login.LoginScreen
 import com.example.composeavanzado.screens.login.LoginViewModel
-import com.example.composeavanzado.screens.SettingsApp
-import com.example.composeavanzado.screens.PokerApp
-import com.example.composeavanzado.screens.SplashScreen
+import com.example.composeavanzado.screens.home.PokerApp
+import com.example.composeavanzado.screens.home.TorneosScreen
+import com.example.composeavanzado.screens.splash.SplashScreen
 import com.example.composeavanzado.screens.login.RegisterScreen
+import com.example.composeavanzado.screens.login.RegisterViewModel
+import com.example.composeavanzado.screens.perfil.ProfileScreen
+import com.example.composeavanzado.screens.perfil.ProfileViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
-fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth) {
+fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth, db:FirebaseFirestore) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = AppScreens.Splash.route) {
         composable(route = AppScreens.Main.route) {
             PokerApp(windowSizeClass, navController)
         }
-        composable(route = AppScreens.Settings.route) {
-            SettingsApp(windowSizeClass, navController)
+        composable(route = AppScreens.Torneos.route) {
+            TorneosScreen(windowSizeClass, navController)
         }
         composable(route = AppScreens.Login.route) {
             LoginScreen(navController, LoginViewModel(), auth)
         }
         composable(route = AppScreens.Register.route) {
-            RegisterScreen(navController, LoginViewModel(), auth)
+            RegisterScreen(navController, RegisterViewModel(), auth, db)
         }
         composable(route = AppScreens.Splash.route) {
             SplashScreen(navController)
+        }
+        composable(route = AppScreens.Profile.route) {
+            ProfileScreen(navController, ProfileViewModel(), db, auth)
         }
     }
 }

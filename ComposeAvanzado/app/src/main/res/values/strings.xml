@@ -18,7 +18,8 @@
     <string name="escala">Escala de manos</string>
     <!-- Navigation Bar -->
     <string name="bottom_navigation_home">Home</string>
-    <string name="bottom_navigation_ajustes">Ajustes</string>
+    <string name="bottom_navigation_torneos">Torneos</string>
+    <string name="bottom_navigation_perfil">Perffil</string>
     <!-- Login Errors -->
     <string name="error_invalid_credentials">El email o contraseña son incorrectos</string>
     <string name="error_not_a_valid_email">No hay cuenta asignada a ese email</string>

@@ -1,4 +1,4 @@
-package com.example.composeavanzado.screens
+package com.example.composeavanzado.screens.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

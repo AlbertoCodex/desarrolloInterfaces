@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.composeavanzado.R
+import com.example.composeavanzado.data.UserData
 import com.example.composeavanzado.navigation.AppScreens
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -14,14 +15,22 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthRecentLoginRequiredException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.firestore.FirebaseFirestore
 
-class LoginViewModel : ViewModel() {
+class RegisterViewModel : ViewModel() {
+    private val collection_users = "Usuarios"
 
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> = _email
 
     private val _password = MutableLiveData<String>()
     val password: LiveData<String> = _password
+
+    private val _pais = MutableLiveData<String>()
+    val pais: LiveData<String> = _pais
+
+    private val _telefono = MutableLiveData<String>()
+    val telefono: LiveData<String> = _telefono
 
     private val _loginEnable = MutableLiveData<Boolean>()
     val loginEnable: LiveData<Boolean> = _loginEnable
@@ -32,40 +41,50 @@ class LoginViewModel : ViewModel() {
     private val _errorDialog = MutableLiveData<String>()
     val errorDialog: LiveData<String> = _errorDialog
 
-    fun onLoginChange(email: String, password: String) {
+    fun onRegisterChange(email: String, password: String, pais:String, telefono: String) {
         _email.value = email
         _password.value = password
-        _loginEnable.value = isValidEmail(email) && isValidPassword(password)
+        _pais.value = pais
+        _telefono.value = telefono
+        _loginEnable.value = isValidEmail(email) && isValidPassword(password) && isValidPais(pais) && isValidTelefono(telefono)
     }
 
     private fun isValidPassword(password: String): Boolean = password.length > 6
 
     private fun isValidEmail(email: String): Boolean =
-       Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        Patterns.EMAIL_ADDRESS.matcher(email).matches()
+
+    private fun isValidPais(pais: String): Boolean = pais.length >= 3
+    private fun isValidTelefono(telefono: String): Boolean = telefono.length == 9
 
     fun setShowDialogFalse() {
         _showDialog.value = false
     }
 
-    fun onLoginSelected(
+    fun onRegisterSelected(
         navController: NavController,
         auth: FirebaseAuth,
         email: String,
         password: String,
-        context: Context
+        pais: String,
+        telefono: String,
+        context: Context,
+        db:FirebaseFirestore,
     ) {
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener() {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener() {
             if (it.isSuccessful) {
-                navController.navigate(route = AppScreens.Main.route) {
-                    popUpTo(AppScreens.Login.route) {
-                        inclusive = true
-                    } // Elimina la LoginScreen del stack navegable
-                }
+                createUser(db, email, password, pais, telefono)
+                navController.navigate(route = AppScreens.Login.route)
             } else {
                 _errorDialog.value = getFirebaseAuthErrorMessage(it.exception, context)
                 _showDialog.value = true
             }
         }
+    }
+
+    private fun createUser(db: FirebaseFirestore, email: String, password: String, pais:String, telefono: String) {
+        val user = UserData(email, password, pais, telefono)
+        db.collection(collection_users).add(user)
     }
 
     private fun getFirebaseAuthErrorMessage(exception: Exception?, context: Context): String {
