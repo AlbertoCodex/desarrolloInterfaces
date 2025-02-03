@@ -5,17 +5,18 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.composeavanzado.screens.LoginScreen
-import com.example.composeavanzado.screens.LoginViewModel
+import com.example.composeavanzado.screens.login.LoginScreen
+import com.example.composeavanzado.screens.login.LoginViewModel
 import com.example.composeavanzado.screens.SettingsApp
 import com.example.composeavanzado.screens.PokerApp
-import com.example.composeavanzado.screens.RegisterScreen
+import com.example.composeavanzado.screens.SplashScreen
+import com.example.composeavanzado.screens.login.RegisterScreen
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
 fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = AppScreens.Login.route) {
+    NavHost(navController = navController, startDestination = AppScreens.Splash.route) {
         composable(route = AppScreens.Main.route) {
             PokerApp(windowSizeClass, navController)
         }
@@ -27,6 +28,9 @@ fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth) {
         }
         composable(route = AppScreens.Register.route) {
             RegisterScreen(navController, LoginViewModel(), auth)
+        }
+        composable(route = AppScreens.Splash.route) {
+            SplashScreen(navController)
         }
     }
 }

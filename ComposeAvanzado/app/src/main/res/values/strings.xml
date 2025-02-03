@@ -16,9 +16,15 @@
     <string name="mejores_manos">Mejores Manos</string>
     <string name="reglas">Reglas</string>
     <string name="escala">Escala de manos</string>
-
     <!-- Navigation Bar -->
     <string name="bottom_navigation_home">Home</string>
     <string name="bottom_navigation_ajustes">Ajustes</string>
+    <!-- Login Errors -->
+    <string name="error_invalid_credentials">El email o contraseña son incorrectos</string>
+    <string name="error_not_a_valid_email">No hay cuenta asignada a ese email</string>
+    <string name="error_email_already_registered">Este email ya está registrado</string>
+    <string name="error_weak_password">La contraseña es demasiado débil</string>
+    <string name="error_recent_login_required">Debes haber iniciado sesión recientemente para realizar esta acción</string>
+    <string name="error_unknown">Ha ocurrido un error desconocido</string>
 
 </resources>

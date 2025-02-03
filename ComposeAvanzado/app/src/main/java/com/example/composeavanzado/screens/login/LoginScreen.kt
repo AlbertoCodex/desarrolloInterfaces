@@ -1,5 +1,6 @@
-package com.example.composeavanzado.screens
+package com.example.composeavanzado.screens.login
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,10 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -23,6 +26,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -54,6 +58,9 @@ fun Login(
     val email : String by viewModel.email.observeAsState(initial = "")
     val password : String by viewModel.password.observeAsState(initial = "")
     val loginEnable:Boolean by viewModel.loginEnable.observeAsState(initial = false)
+    val showDialog:Boolean by viewModel.showDialog.observeAsState(initial = false)
+    val errorDialog by viewModel.errorDialog.observeAsState("")
+    val context = LocalContext.current
 
     Column(modifier = modifier) {
         HeaderImage(modifier = Modifier.align(Alignment.CenterHorizontally))
@@ -64,7 +71,23 @@ fun Login(
         Spacer(modifier = Modifier.padding(8.dp))
         ForgotPassword(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.padding(16.dp))
-        Divider(loginEnable, viewModel, navController, Modifier.align(Alignment.CenterHorizontally), auth, email, password)
+        Divider(loginEnable, viewModel, navController, Modifier.align(Alignment.CenterHorizontally), auth, email, password, context)
+        ErrorDialog(showDialog, { viewModel.setShowDialogFalse() }, errorDialog)
+    }
+}
+
+@Composable
+fun ErrorDialog(showDialog:Boolean, onConfirm: () -> Unit, errorDialog: String) {
+    if (showDialog) {
+        AlertDialog(onDismissRequest = { onConfirm() },
+            confirmButton = {
+                TextButton(onClick = { onConfirm() }) {
+                    Text(text = "Entendido")
+                }
+            },
+            title = { Text(text = "Se ha producido un error") },
+            text = { Text(text = errorDialog) }
+        )
     }
 }
 
@@ -76,12 +99,13 @@ fun Divider(
     modifier: Modifier,
     auth: FirebaseAuth,
     email: String,
-    password: String
+    password: String,
+    context: Context
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
-        LoginButton(loginEnable) {viewModel.onLoginSelected(navController, auth, email, password)}
+        LoginButton(loginEnable) {viewModel.onLoginSelected(navController, auth, email, password, context)}
     }
     HorizontalDivider(
         thickness = 2.dp,

@@ -4,5 +4,6 @@ sealed class AppScreens(val route:String) {
     object Main:AppScreens("main")
     object Settings:AppScreens("settings")
     object Login:AppScreens("login")
-    object Register:AppScreens(route = "register")
+    object Register:AppScreens("register")
+    object Splash:AppScreens("splash")
 }
