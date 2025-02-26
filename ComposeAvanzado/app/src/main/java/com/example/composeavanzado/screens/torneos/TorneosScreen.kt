@@ -36,9 +36,28 @@ import com.example.composeavanzado.screens.home.SootheBottomNavigation
 import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
-fun TorneosScreen(navController: NavController, viewModel: TorneosViewModel, db:FirebaseFirestore) {
+fun TorneosScreen(
+    navController: NavController,
+    viewModel: TorneosViewModel,
+    db: FirebaseFirestore,
+    modalidad: String?
+) {
     val torneos by viewModel.torneos.observeAsState(emptyList())
     val isLoading by viewModel.isLoading.observeAsState(true)
+    // Usamos remember para evitar que la llamada se repita
+    val lastModalidad = remember { mutableStateOf<String?>(null) }
+    // Cargar los torneos con modalidad si la modalidad no es null
+    // Vienen de MainActivity.kt
+    if (modalidad != null && modalidad != lastModalidad.value) {
+        // Actualizamos la modalidad que estamos cargando
+        lastModalidad.value = modalidad
+        // Hacemos la llamada para cargar los torneos
+        viewModel.cargarTorneosConFiltros(db, modalidad)
+    }
+    // Si modalidad es null y aún no se han cargado torneos, hacemos la carga sin filtros
+    if (modalidad == null && torneos.isEmpty() && !isLoading) {
+        viewModel.cargarTorneosConFiltros(db)
+    }
 
     Scaffold(
         bottomBar = { SootheBottomNavigation(modifier = Modifier, navController = navController) }
@@ -116,7 +135,7 @@ fun TorneoItem(torneo: TorneoData) {
 
 @Composable
 fun FiltrosSection(onFilterChange: (String?, String?) -> Unit) {
-    val modalidades = listOf("omaha", "texashe", "draw", "stud", "horse")
+    val modalidades = listOf("Texas Holdem", "Omaha", "Five Card Draw", "Seven Card Stud", "H.O.R.S.E.")
     val paises = listOf("España", "Francia", "Alemania")
 
     var modalidad by remember { mutableStateOf<String?>(null) }
@@ -169,11 +188,11 @@ fun DropdownMenuFiltro(label: String, opciones: List<String>, seleccion: String?
 // Función auxiliar para mapear el nombre de la modalidad al recurso
 fun getModalidadResource(modalidad: String): Int {
     return when (modalidad) {
-        "omaha" -> R.drawable.modalidad_omaha
-        "texashe" -> R.drawable.modalidad_texashe
-        "draw" -> R.drawable.modalidad_draw
-        "stud" -> R.drawable.modalidad_stud
-        "horse" -> R.drawable.modalidad_horse
+        "Texas Holdem" -> R.drawable.modalidad_texashe
+        "Omaha" -> R.drawable.modalidad_omaha
+        "Five Card Draw" -> R.drawable.modalidad_draw
+        "Seven Card Stud" -> R.drawable.modalidad_stud
+        "H.O.R.S.E." -> R.drawable.modalidad_horse
         else -> R.drawable.login_icon
     }
 }

@@ -57,6 +57,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.composeavanzado.R
@@ -191,7 +192,7 @@ fun SootheBottomNavigation(modifier: Modifier = Modifier, navController: NavCont
             },
             selected = false,
             onClick = {
-                navController.navigate(route = AppScreens.Torneos.route)
+                navController.navigate("torneos/null")
             }
         )
         NavigationBarItem(
@@ -259,11 +260,12 @@ fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
     @StringRes text: Int,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit) {
+    modalidad: String,
+    navController: NavController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
-            .clickable { onClick() }) {
+            .clickable { navController.navigate("torneos/${modalidad}") }) {
         Image(painter = painterResource(drawable),
             contentDescription = null,
             contentScale = ContentScale.Fit,
@@ -291,8 +293,9 @@ fun AlignYourBodyRow(
     ) {
         items(alignYourBodyData) { item ->
             AlignYourBodyElement(item.drawable, item.text,
-                onClick = {
-                navController.navigate("torneos")})
+                modalidad = stringResource(id = item.text),
+                navController = navController
+            )
         }
     }
 }

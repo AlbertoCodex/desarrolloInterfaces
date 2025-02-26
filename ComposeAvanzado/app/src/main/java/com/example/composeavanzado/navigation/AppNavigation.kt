@@ -25,8 +25,9 @@ fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth, db:Fireb
         composable(route = AppScreens.Main.route) {
             PokerApp(windowSizeClass, navController)
         }
-        composable(route = AppScreens.Torneos.route) {
-            TorneosScreen(navController, TorneosViewModel() , db)
+        composable(route = "torneos/{modalidad}") { backStackEntry ->
+            val modalidad = backStackEntry.arguments?.getString("modalidad")
+            TorneosScreen(navController, TorneosViewModel(), db, modalidad)
         }
         composable(route = AppScreens.Login.route) {
             LoginScreen(navController, LoginViewModel(), auth)
