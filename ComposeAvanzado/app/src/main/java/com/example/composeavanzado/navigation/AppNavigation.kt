@@ -8,12 +8,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.composeavanzado.screens.login.LoginScreen
 import com.example.composeavanzado.screens.login.LoginViewModel
 import com.example.composeavanzado.screens.home.PokerApp
-import com.example.composeavanzado.screens.home.TorneosScreen
+import com.example.composeavanzado.screens.torneos.TorneosScreen
 import com.example.composeavanzado.screens.splash.SplashScreen
 import com.example.composeavanzado.screens.login.RegisterScreen
 import com.example.composeavanzado.screens.login.RegisterViewModel
 import com.example.composeavanzado.screens.perfil.ProfileScreen
 import com.example.composeavanzado.screens.perfil.ProfileViewModel
+import com.example.composeavanzado.screens.torneos.TorneosViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -25,7 +26,7 @@ fun AppNavigation(windowSizeClass: WindowSizeClass, auth: FirebaseAuth, db:Fireb
             PokerApp(windowSizeClass, navController)
         }
         composable(route = AppScreens.Torneos.route) {
-            TorneosScreen(windowSizeClass, navController)
+            TorneosScreen(navController, TorneosViewModel() , db)
         }
         composable(route = AppScreens.Login.route) {
             LoginScreen(navController, LoginViewModel(), auth)

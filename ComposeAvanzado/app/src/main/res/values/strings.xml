@@ -4,13 +4,13 @@
     <string name="modalidades">Modalidades</string>
     <string name="utilidades">Utilidades</string>
     <!-- Modalidades -->
-    <string name="omaha">Omaha</string>
-    <string name="texashe">Texas Holdem</string>
-    <string name="fivecard">Five Card Draw</string>
-    <string name="sevencard">Seven Card Stud</string>
-    <string name="razz">Razz</string>
-    <string name="triple_stud">Triple Stud</string>
-    <string name="horse">H.O.R.S.E.</string>
+    <string name="mod_omaha">Omaha</string>
+    <string name="mod_texashe">Texas Holdem</string>
+    <string name="mod_fivecard">Five Card Draw</string>
+    <string name="mod_sevencard">Seven Card Stud</string>
+    <string name="mod_razz">Razz</string>
+    <string name="mod_triple_stud">Triple Stud</string>
+    <string name="mod_horse">H.O.R.S.E.</string>
     <!-- Utilidades -->
     <string name="apuestas">Apuestas</string>
     <string name="mejores_manos">Mejores Manos</string>

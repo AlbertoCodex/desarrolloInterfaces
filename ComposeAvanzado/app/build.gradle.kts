@@ -74,6 +74,7 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
     // Coil
+    implementation("io.coil-kt:coil-compose:2.3.0")
     implementation(libs.coil)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)

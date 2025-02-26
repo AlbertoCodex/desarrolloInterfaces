@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -93,7 +94,7 @@ fun PokerApp(windowSize: WindowSizeClass, navController: NavController) {
             PokerAppPortrait(navController)
         }
         WindowWidthSizeClass.Expanded -> {
-            PokerAppLandscape()
+            PokerAppLandscape(navController)
         }
         else -> PokerAppPortrait(navController) // Default
     }
@@ -105,18 +106,18 @@ fun PokerAppPortrait(navController: NavController) {
         Scaffold(
             bottomBar = { SootheBottomNavigation(modifier = Modifier, navController) }
         ) { padding ->
-            HomeScreen(Modifier.padding(padding))
+            HomeScreen(Modifier.padding(padding), navController)
         }
     }
 }
 
 @Composable
-fun PokerAppLandscape() {
+fun PokerAppLandscape(navController: NavController) {
     ComposeAvanzadoTheme {
         Surface(color = MaterialTheme.colorScheme.background) {
             Row {
                 SootheNavigationRail()
-                HomeScreen()
+                HomeScreen(modifier = Modifier, navController)
             }
         }
     }
@@ -141,15 +142,14 @@ fun HomeSection(
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
     Column(
         modifier
             .verticalScroll(rememberScrollState())
     ) {
         Spacer(Modifier.height(16.dp))
-        SearchBar(Modifier.padding(horizontal = 16.dp))
         HomeSection(title = R.string.modalidades) {
-            AlignYourBodyRow()
+            AlignYourBodyRow(navController)
         }
         HomeSection(title = R.string.utilidades) {
             FavoriteCollectionsGrid()
@@ -255,37 +255,15 @@ fun SootheNavigationRail(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SearchBar(modifier: Modifier = Modifier) {
-    TextField(
-        value = "",
-        onValueChange = {},
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null
-            )
-        },
-        colors = TextFieldDefaults.colors(
-            unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-            focusedContainerColor = MaterialTheme.colorScheme.surface
-        ),
-        placeholder = {
-            Text("Buscar")
-        },
-        modifier = modifier
-            .fillMaxWidth()
-            .heightIn(min = 56.dp)
-    )
-}
-
-@Composable
 fun AlignYourBodyElement(
     @DrawableRes drawable: Int,
     @StringRes text: Int,
-    modifier: Modifier = Modifier) {
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier) {
+        modifier = modifier
+            .clickable { onClick() }) {
         Image(painter = painterResource(drawable),
             contentDescription = null,
             contentScale = ContentScale.Fit,
@@ -303,6 +281,7 @@ fun AlignYourBodyElement(
 
 @Composable
 fun AlignYourBodyRow(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     LazyRow(
@@ -311,7 +290,9 @@ fun AlignYourBodyRow(
         modifier = modifier
     ) {
         items(alignYourBodyData) { item ->
-            AlignYourBodyElement(item.drawable, item.text)
+            AlignYourBodyElement(item.drawable, item.text,
+                onClick = {
+                navController.navigate("torneos")})
         }
     }
 }
@@ -364,11 +345,11 @@ fun FavoriteCollectionsGrid(
 
 // Data
 private val alignYourBodyData = listOf(
-    R.drawable.modalidad_omaha to R.string.omaha,
-    R.drawable.modalidad_texashe to R.string.texashe,
-    R.drawable.modalidad_draw to R.string.fivecard,
-    R.drawable.modalidad_stud to R.string.sevencard,
-    R.drawable.modalidad_horse to R.string.horse,
+    R.drawable.modalidad_omaha to R.string.mod_omaha,
+    R.drawable.modalidad_texashe to R.string.mod_texashe,
+    R.drawable.modalidad_draw to R.string.mod_fivecard,
+    R.drawable.modalidad_stud to R.string.mod_sevencard,
+    R.drawable.modalidad_horse to R.string.mod_horse,
 ).map { DrawableStringPair(it.first, it.second) }
 private val favoriteCollectionsData = listOf(
     R.drawable.utilidad_manos to R.string.mejores_manos,

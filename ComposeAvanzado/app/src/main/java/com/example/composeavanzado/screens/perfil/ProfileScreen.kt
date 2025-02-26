@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -20,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,6 +32,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.composeavanzado.R
+import com.example.composeavanzado.screens.home.SootheBottomNavigation
 import com.example.composeavanzado.screens.login.ErrorDialog
 import com.example.composeavanzado.screens.login.PaisField
 import com.example.composeavanzado.screens.login.PasswordField
@@ -44,16 +48,26 @@ fun ProfileScreen(
     auth: FirebaseAuth
 ) {
     val userEmail = auth.currentUser?.email.orEmpty()
-    LaunchedEffect(userEmail) {
-        if (userEmail.isNotEmpty()) {
-            viewModel.getUserByEmail(db, userEmail)
+    val isLoading by viewModel.isLoading.observeAsState(true)
+
+    Scaffold(
+        bottomBar = { SootheBottomNavigation(navController = navController) } // Agregar la bottom bar
+    ) { padding ->
+        Box(
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .padding(padding)
+        ) {
+            if (isLoading) {
+                if (userEmail.isNotEmpty()) {
+                    viewModel.getUserByEmail(db, userEmail)
+                }
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            } else {
+                Profile(Modifier.align(Alignment.Center), navController, viewModel, db)
+            }
         }
-    }
-    Box(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)) {
-        Profile(Modifier.align(Alignment.Center), navController, viewModel, db)
     }
 }
 
@@ -72,32 +86,28 @@ fun Profile(
     val showDialog:Boolean by viewModel.showDialog.observeAsState(initial = false)
     val errorDialog:String by viewModel.errorDialog.observeAsState("")
 
-    val isLoading by viewModel.isLoading.observeAsState(false)
-    if (isLoading) {
-        CircularProgressIndicator()
-    } else {
-        Column(modifier = modifier) {
-            IconImage(modifier = Modifier.align(Alignment.CenterHorizontally))
-            Spacer(modifier = Modifier.padding(16.dp))
-            EmailProfileField(email) { viewModel.onProfileChange(it, password, pais, telefono) }
-            Spacer(modifier = Modifier.padding(4.dp))
-            PasswordField(password) { viewModel.onProfileChange(email, it, pais, telefono) }
-            Spacer(modifier = Modifier.padding(8.dp))
-            // Add mas campos de informacion
-            PaisField(pais) { viewModel.onProfileChange(email, password, it, telefono) }
-            Spacer(modifier = Modifier.padding(8.dp))
-            TelefonoField(telefono) { viewModel.onProfileChange(email, password, pais, it) }
-            Spacer(modifier = Modifier.padding(16.dp))
-            ActualizarButton(loginEnable) { viewModel.onActualizarSelected(email, password, pais, telefono, db) }
-            ErrorDialog(showDialog, { viewModel.setShowDialogFalse() }, errorDialog)
-        }
+    Column(modifier = modifier) {
+        IconImage(modifier = Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.padding(16.dp))
+        EmailProfileField(email) { viewModel.onProfileChange(it, password, pais, telefono) }
+        Spacer(modifier = Modifier.padding(4.dp))
+        PasswordField(password) { viewModel.onProfileChange(email, it, pais, telefono) }
+        Spacer(modifier = Modifier.padding(8.dp))
+        // Add mas campos de informacion
+        PaisField(pais) { viewModel.onProfileChange(email, password, it, telefono) }
+        Spacer(modifier = Modifier.padding(8.dp))
+        TelefonoField(telefono) { viewModel.onProfileChange(email, password, pais, it) }
+        Spacer(modifier = Modifier.padding(16.dp))
+        ActualizarButton(loginEnable) { viewModel.onActualizarSelected(email, password, pais, telefono, db) }
+        ErrorDialog(showDialog, { viewModel.setShowDialogFalse() }, errorDialog)
     }
 }
 
 @Composable
-fun ActualizarButton(loginEnable: Boolean, onActualizarSelected: () -> Unit) {
+fun ActualizarButton(loginEnable: Boolean, onConfirm: () -> Unit) {
+    val openDialog = remember { mutableStateOf(false) }
     Button(
-        onClick = {onActualizarSelected()},
+        onClick = {openDialog.value = true},
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
@@ -111,6 +121,35 @@ fun ActualizarButton(loginEnable: Boolean, onActualizarSelected: () -> Unit) {
     ) {
         Text(text = "Actualizar información")
     }
+
+    if (openDialog.value) {
+        ConfirmDialog(
+            onConfirm = {
+                onConfirm()
+                openDialog.value = false
+            },
+            onDismiss = {openDialog.value = false}
+        )
+    }
+}
+
+@Composable
+fun ConfirmDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
+    androidx.compose.material3.AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Confirmar actualización") },
+        text = { Text("¿Estás seguro de que quieres actualizar la información?") },
+        confirmButton = {
+            Button(onClick = onConfirm) {
+                Text("Confirmar")
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text("Cancelar")
+            }
+        }
+    )
 }
 
 @Composable
@@ -139,3 +178,4 @@ fun EmailProfileField(email:String, onTextFieldChange:(String) -> Unit) {
         )
     )
 }
+

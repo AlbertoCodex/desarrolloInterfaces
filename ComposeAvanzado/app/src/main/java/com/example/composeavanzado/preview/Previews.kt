@@ -12,23 +12,17 @@ import com.example.composeavanzado.screens.home.FavoriteCollectionCard
 import com.example.composeavanzado.screens.home.FavoriteCollectionsGrid
 import com.example.composeavanzado.screens.home.HomeScreen
 import com.example.composeavanzado.screens.home.HomeSection
-import com.example.composeavanzado.screens.home.SearchBar
 import com.example.composeavanzado.ui.theme.ComposeAvanzadoTheme
 
+/*
 class Previews {
-
-    @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
-    @Composable
-    fun SearchBarPreview() {
-        ComposeAvanzadoTheme { SearchBar(Modifier.padding(8.dp)) }
-    }
 
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun AlignYourBodyElementPreview() {
         ComposeAvanzadoTheme {
             AlignYourBodyElement(
-                text = R.string.omaha,
+                text = R.string.mod_omaha,
                 drawable = R.drawable.utilidad_manos,
                 modifier = Modifier.padding(8.dp)
             )
@@ -63,7 +57,7 @@ class Previews {
     @Composable
     fun HomeSectionPreview() {
         ComposeAvanzadoTheme {
-            HomeSection(R.string.omaha) {
+            HomeSection(R.string.mod_omaha) {
                 AlignYourBodyRow()
             }
         }
@@ -75,3 +69,5 @@ class Previews {
         ComposeAvanzadoTheme { HomeScreen() }
     }
 }
+
+ */
